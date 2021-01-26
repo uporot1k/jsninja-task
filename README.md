@@ -1,24 +1,34 @@
-# New Project
+# Тестовое задание
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+## Задача
 
-## Available Scripts
+Написать логику для [WYSIWYG](https://ru.wikipedia.org/wiki/WYSIWYG), который имеет из функциональности:
 
-### npm start
+- Хедеры
+- Italic
+- Bold
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+Дополнительные требования:
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+- При вырезании (CTRL+X) исходного контента и последующей вставке (CTRL+V), текст и его стилизация остаются неизменными
+- Отсутствие возможности XSS-атак
+- При копировании исходного текста в редактор [Microsoft Office Wold Online](https://office.live.com/), стилизация (italic, хедеры и bold) остаются неизменными
 
-### npm run build
+Браузеры: Chrome, Safari and Firefox
 
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
+## Технологии
 
-**For the best production performance:** Add a build bundler plugin like [@snowpack/plugin-webpack](https://github.com/snowpackjs/snowpack/tree/main/plugins/plugin-webpack) or [snowpack-plugin-rollup-bundle](https://github.com/ParamagicDev/snowpack-plugin-rollup-bundle) to your `snowpack.config.json` config file.
+Использовать можно любой язык, транслирующийся в `JavaScript` (`TypeScript`, `CoffeeScript`, `ClojureScript` и тд.) или обычный `JavaScript`, с условием использования только стандартного `DOM API` без дополнительных обвязок фреймворков. То есть,  если, к примеру, язык `Elm` не умеет в работу с нативным `DOM API`  выполненное задание на `Elm` не принимается. 
 
-### Q: What about Eject?
+Также, запрещается устанавливать какие либо зависимости (кроме `devDependencies` для вашего языка). Все функции, которые решают задачи, должны состоять из композиции стандартного для выбранного языка API.
 
-No eject needed! Snowpack guarantees zero lock-in, and CSA strives for the same.
+## Исходные материалы
+
+Потенциальному студенту курса даются: `index.html` с версткой [WYSIWYG](https://ru.wikipedia.org/wiki/WYSIWYG), `styles/*.css` со стилями для [WYSIWYG](https://ru.wikipedia.org/wiki/WYSIWYG).
+
+## Как сдавать задание
+
+1. Размещаете репозиторий на GitHub / GitLab (не делайте форк этого репозитория, если опасаетесь, что конкуренты "подсмотрят")
+2. Добавляете в коллабораторы репозитория @xanf и @jsmonk
+3. Создаете issue в своем репозитории "просьба проверить тестовое задание" и назначаете его @xanf
+4. Все ревью будет выполнено в issue

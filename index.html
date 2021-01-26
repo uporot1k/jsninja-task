@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Starter Snowpack App" />
-    <link rel="stylesheet" type="text/css" href="/index.css" />
-    <title>Starter Snowpack App</title>
+    <meta charset="UTF-8" />
+    <title>JavaScript-инженер</title>
+    <link rel="stylesheet" href="./src/styles/editor.css" />
+    <link rel="stylesheet" href="./src/styles/page.css" />
   </head>
   <body>
-    <h1>Welcome to Snowpack!</h1>
-    <script type="module" src="/index.js"></script>
+    <div class="container">
+      <main class="papercard">
+        <div class="editor">
+          <div class="edit-area" placeholder="Type something..." contenteditable="true"></div>
+          <div class="toolkit">
+            <button class="head-1">
+              <img src="./src/assets/icons_h1.svg" alt="Head 1 button icon" />
+            </button>
+            <button class="head-2">
+              <img src="./src/assets/icons_h2.svg" alt="Head 2 button icon" />
+            </button>
+            <button class="bold">
+              <img src="./src/assets/icons_bold.svg" alt="Bold button icon" />
+            </button>
+            <button class="italic">
+              <img src="./src/assets/icons_italic.svg" alt="Italic button icon" />
+            </button>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <p class="authority">
+          <b>Disgned</b> by
+          <a href="https://dribbble.com/yaroslavsamoilov" target="_blank"
+            >Yaroslav Samoilov</a
+          >
+        </p>
+      </footer>
+    </div>
+    <script type="module" src="./src/js/index.js"></script>
   </body>
 </html>
