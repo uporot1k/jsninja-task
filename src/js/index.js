@@ -51,8 +51,7 @@ class Editor {
     const tagClass = `header${level}-text`;
 
     const focusNode = getFocusNode();
-
-    if (!this.$area.contains(focusNode) && focusNode.innerText === '\n') {
+    if (!this.$area.contains(focusNode) || focusNode.innerText === '\n') {
       this.$area.focus();
       return;
     }
@@ -64,20 +63,16 @@ class Editor {
       this.setComputedStyle(header, tagClass);
     } catch {
       // если selection захватывает разные теги
+      const range = window.getSelection().getRangeAt(0);
+      const rangeContent = range.cloneContents();
 
-      document.execCommand('fontName', false, 'test');
+      const headerEl = document.createElement(tag);
 
-      const fontNodeList = this.$area.querySelectorAll('font');
+      headerEl.append(rangeContent);
+      range.deleteContents();
+      range.insertNode(headerEl);
 
-      fontNodeList.forEach((node) => {
-        const headerEl = document.createElement(tag);
-
-        headerEl.innerHTML = node.innerHTML;
-
-        node.replaceWith(headerEl);
-
-        this.setComputedStyle(headerEl, tagClass);
-      });
+      this.setComputedStyle(headerEl, tagClass);
     }
   }
 
@@ -97,25 +92,31 @@ class Editor {
   bindPastEvent() {
     this.$area.addEventListener('paste', (e) => {
       e.preventDefault();
-      // console.log(e);
 
       const pastedHtml = e.clipboardData.getData('text/html');
-
       if (pastedHtml) {
         const parser = new DOMParser();
 
         const parsedContent = parser.parseFromString(pastedHtml, 'text/html');
 
-        parsedContent.body.childNodes.forEach((node) => this.reduceMarkup(node));
+        [...parsedContent.body.childNodes].forEach((node) => this.reduceMarkup(node));
 
         const fragment = document.createDocumentFragment();
         const range = window.getSelection().getRangeAt(0);
 
         range.deleteContents();
-        parsedContent.body.childNodes.forEach((node) => {
+
+        [...parsedContent.body.childNodes].forEach((node) => {
           fragment.appendChild(node);
         });
         range.insertNode(fragment);
+        range.collapse();
+      } else {
+        const textContent = e.clipboardData.getData('text/plain');
+        const textEl = document.createTextNode(textContent);
+        const range = window.getSelection().getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(textEl);
         range.collapse();
       }
     });
@@ -169,7 +170,7 @@ class Editor {
         el.innerHTML = node.innerHTML;
         node.replaceWith(el);
 
-        [...el.childNodes].forEach((n) => this.reduceMarkup(n));
+        [...node.childNodes].forEach((n) => this.reduceMarkup(n));
         break;
       }
       default:
